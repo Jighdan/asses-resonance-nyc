@@ -15,7 +15,7 @@ const ProductsCatalog = () => {
 
 	return (
 		<section>
-			<Panel />
+			<Panel user={ "Jaime" } />
 			<Catalog catalog={ productsCatalog } />
 		</section>
 	);

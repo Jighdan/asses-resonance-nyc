@@ -10,9 +10,7 @@ export const constructUserRecord = (record) => {
 	return {
 		firstName: record.get("First Name"),
 		lastName: record.get("Last Name"),
-		user: record.get("username"),
 		email: record.get("email"),
-		password: record.get("Password")
 	};
 };
 

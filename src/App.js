@@ -18,12 +18,12 @@ function App() {
   };
 
   return (
-    <AuthContext.Provider value={ { authToken, setAuthToken: setToken } }>
+    <AuthContext.Provider value={ { authToken: authToken, setAuthToken: setToken } }>
       <BrowserRouter>
         <Switch>
           <PrivateRoute path="/catalog" component={ ProductsCatalog } />
           <Route path="/sign-up" component={ SignUp } />
-          <Route path="/" exact component={ () => <SignIn /> } />
+          <Route path="/" exact component={ SignIn } />
         </Switch>
       </BrowserRouter>
     </AuthContext.Provider>

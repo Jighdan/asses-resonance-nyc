@@ -1,20 +1,7 @@
 import React, {  } from "react";
 import { Link } from "react-router-dom";
-import airtableBase from "../plugins/airtablePlugin";
 
 const SignUp = () => {
-	const constructUser = (data) => {
-		return {
-			"fields": {
-				"Password": data?.password,
-				"First Name": data?.firstName,
-				"Last Name": data?.lastName,
-				"email": data?.email,
-				"username": data?.username
-			}
-		}
-	};
-
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		console.log(event);

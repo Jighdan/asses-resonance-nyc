@@ -20,17 +20,26 @@ export const getAirtableUserAuth = async (email, password) => {
       const authRecords = records.map(record => constructUserAuthRecord(record));
       userAuth = authRecords.find(record => record.email === email && record.password === password);
       fetchNextPage();
-    })
-
+    });
   return userAuth.id;
 };
 
-export const getAirtableUserDataFromId = (userId) => {
-  airtableBase("Users")
-    .find(userId, (error, record) => {
-      if (error) { console.error(error); return };
-      return constructUserRecord(record);
-    })
+export const getAirtableUserDataFromId = async (userId) => {
+  let userRecord;
+  await airtableBase("Users")
+    .select({ view: "Grid view" })
+    .eachPage((records, fetchNextPage) => {
+      userRecord = records.find(record => record.id === userId);
+      fetchNextPage();
+    });
+    return userRecord ? constructUserRecord(userRecord) : userRecord;
+    // .find(userId, async (error, record) => {
+    //   if (error) { console.error(error); return };
+    //   const userData = await constructUserRecord(record);
+    //   return userData;
+    // });
+  // console.log(userData);
+  // return constructUserRecord(userData);
 };
 
 export const airtableCatalog = async () => {

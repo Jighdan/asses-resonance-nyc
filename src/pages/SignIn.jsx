@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { getAirtableUserAuth } from "../plugins/airtablePlugin";
@@ -54,11 +54,11 @@ const SignIn = () => {
 
 				<input type="submit" value="Sign In" />
 			</form>		
-			
+
 			<Link to="/signup">Not registered yet?</Link>
 			{ isError && <h3>The username or password provided were invalid!</h3> }
 		</section>
-	)
+	);
 };
 
 export default SignIn;
