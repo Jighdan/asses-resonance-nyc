@@ -1,35 +1,21 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Redirect } from "react-router-dom";
-import airtableBase from "../plugins/airtablePlugin";
+import React, { useEffect, useState } from "react";
+import { airtableCatalog } from "../plugins/airtablePlugin";
+
+import Panel from "../components/Panel";
 import Catalog from "../components/Catalog";
 
-const ProductsCatalog = ({ props }) => {
+const ProductsCatalog = () => {
 	const [productsCatalog, setProductsCatalog] = useState([]);
 
-	const constructProductRecord = (record) => {
-    return {
-      name: record.get("Name"),
-      picture: record.get("Picture"),
-      description: record.get("Description"),
-      vendor: record.get("vendor"),
-      unitCost: record.get("Unit Cost"),
-      inStock: record.get("In Stock"),
-      size: record.get("Size (WxLxH)"),
-      materials: record.get("Materials and Finishes")
-    }
-	};
-	
 	useEffect(() => {
-		airtableBase("Furniture")
-			.select({ view: "Main View", fields: ["Name", "Picture", "In Stock", "Unit Cost", "Description", "Vendor", "Designer"] })
-			.eachPage((records, fetchNextPage) => {
-				setProductsCatalog(records.map(record => constructProductRecord(record)))
-				fetchNextPage();
-			});
+		airtableCatalog().then(response => {
+			setProductsCatalog(response);
+		});
 	}, []);
 
 	return (
 		<section>
+			<Panel />
 			<Catalog catalog={ productsCatalog } />
 		</section>
 	);
