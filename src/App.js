@@ -1,44 +1,43 @@
 import React, { useEffect, useState } from "react";
-import Airtable from "airtable";
-import Catalog from "./components/Catalog";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import airtableBase from "./plugins/airtablePlugin";
+import LayoutHeader from "./components/Layout.Header";
 
-const airtableData = {
-  apiKey: "keyyj61FnLZAvaS7X",
-  base: "appzeUDpZOqRjLPaJ",
-};
-
-const base = new Airtable({ apiKey: airtableData.apiKey }).base(airtableData.base);
+import ProductsCatalog from "./pages/ProductsCatalog";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 function App() {
-  const [catalog, setCatalog] = useState([]);
+  const [users, setUsers] = useState([]);
 
-  const constructProduct = (record) => {
+  const constructUser = (record) => {
     return {
-      name: record.get("Name"),
-      picture: record.get("Picture"),
-      description: record.get("Description"),
-      vendor: record.get("vendor"),
-      unitCost: record.get("Unit Cost"),
-      inStock: record.get("In Stock"),
-      size: record.get("Size (WxLxH)"),
-      materials: record.get("Materials and Finishes")
-    }
+      firstName: record.get("First Name"),
+      lastName: record.get("Last Name"),
+      user: record.get("username"),
+      email: record.get("email"),
+      password: record.get("Password")
+    };
   };
 
   useEffect(() => {
-    base("Furniture")
-      .select({ view: "Main View", fields: ["Name", "Picture", "In Stock", "Unit Cost", "Description", "Vendor", "Designer"] })
+    airtableBase("Users")
+      .select({ view: "Grid view" /* Load all fields */})
       .eachPage((records, fetchNextPage) => {
-        setCatalog(records.map(record => constructProduct(record)))
+        setUsers(records.map(record => constructUser(record)))
         fetchNextPage();
       })
   }, []);
 
   return (
-    <div>
-      <Catalog catalog={ catalog } />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={ (props) => <ProductsCatalog props={ props } /> } />
+        <Route path="/sign-up" component={ SignUp } />
+        <Route path="/sign-in" component={ () => <SignIn availableUsers={ users } /> } />
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
