@@ -3,7 +3,7 @@ import {
   constructUserAuthRecord,
   constructUserRecord,
   constructCatalogProductRecord
-} from "./dataConstructors";
+} from "./airtableRecordConstructor";
 
 const data = {
   apiKey: "keyyj61FnLZAvaS7X",
@@ -33,13 +33,6 @@ export const getAirtableUserDataFromId = async (userId) => {
       fetchNextPage();
     });
     return userRecord ? constructUserRecord(userRecord) : userRecord;
-    // .find(userId, async (error, record) => {
-    //   if (error) { console.error(error); return };
-    //   const userData = await constructUserRecord(record);
-    //   return userData;
-    // });
-  // console.log(userData);
-  // return constructUserRecord(userData);
 };
 
 export const airtableCatalog = async () => {
@@ -52,4 +45,19 @@ export const airtableCatalog = async () => {
       fetchNextPage();
     });
   return catalog.map(record => constructCatalogProductRecord(record));
+};
+
+export const createAirtableUser = (userData) => {
+  const { username, firstName, lastName, email, password } = userData;
+  airtableBase("Users").create([{
+    "fields": {
+      "Password": password,
+      "First Name": firstName,
+      "Last Name": lastName,
+      "email": email,
+      "username": username,
+    }
+  }], (error) => {
+    if (error) { console.error(error) };
+  });
 };

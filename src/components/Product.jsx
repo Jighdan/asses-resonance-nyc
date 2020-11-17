@@ -1,78 +1,56 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
 
-const ProductSection = styled.section`
-	padding: 1rem 3rem;
-	display: grid;
-	gird-template-rows: auto 2fr 1fr;
-	gap: 0.5rem;
-	align-items: center;
-	background-color: white;
-	border: 0.75px solid lightgray;
-`;
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
 
-const ProductTitle = styled.h1`
-	justify-self: flex-start;
-	align-self: flex-start;
-	font-size: 1.75em;
-	font-weight: 600;
-`;
-
-const ProductImage = styled.img`
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 100%;
-	height: auto;
-	overflow: hidden;
-`;
-
-const ProductInfo = styled.section`
-
-`;
-
-const ProductCost = styled.h3`
-	margin-bottom: 0.75rem;
-	font-size: 1.2em;
-	font-style: italic;
-`;
-
-const ProductStock = styled.span`
-	background-color
-`;
-
-const ProductButton = styled.span`
-	padding: 8px 16px;
-	justify-self: flex-end;
-	border: 1px solid lightgray;
-	border-radius: 5px 0;
-	cursor: pointer;
-	visibility: ${prop => prop.hover ? "visible" : "hidden" };
-`;
+const useStyles = makeStyles(() => ({
+	card: {
+		height: "100%",
+		display: "flex",
+		flexDirection: "column"
+	},
+	cardMedia: {
+		paddingTop: "56.25%",
+	},
+	cardContent: {
+		flexGrow: 1,
+	}
+}));
 
 const Product = ({ product }) => {
-	const {
-		name, picture, description,
-		vendor, unitCost, inStock,
-		size, materials
-	} = product;
-
-	const [hover, setHover] = useState(false);
+	const classes = useStyles();
 
 	return (
-		<ProductSection
-			onMouseEnter={ () => setHover(true) }
-			onMouseLeave={ () => setHover(false) }
-		>
-			<ProductImage src={ picture[0].url } alt={ name } />
+		<Grid item xs={ 12 } sm={ 6 } md={ 4 }>
+			<Card className={ classes.card }>
+				<CardMedia
+					className={ classes.cardMedia }
+					image={ product.picture[0].url }
+					alt={ product.name }
+				/>
 
-			<ProductInfo>
-				<ProductTitle>{ name }</ProductTitle>
-				<ProductStock>{ inStock ? "In Stock" : "Sold Out" }</ProductStock>
-				<ProductCost>${ unitCost.toFixed(2) }</ProductCost>
-			</ProductInfo>
-			
-			<ProductButton hover={ hover }>Request Information</ProductButton>
-		</ProductSection>
+				<CardContent className={ classes.cardContent }>
+					<Typography
+						gutterBottom variant="h5"
+						component="h2"
+					>
+						{ product.name }
+					</Typography>
+					<Typography>{ product.inStock ? "In Stock" : "Sold Out" }</Typography>
+					<Typography>${ product.unitCost.toFixed(2) }</Typography>
+				</CardContent>
+
+				<CardActions>
+					<Button size="small" color="primary">Request Information</Button>
+				</CardActions>
+			</Card>
+		</Grid>
 	)
 };	
 

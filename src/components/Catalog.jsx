@@ -1,22 +1,28 @@
 import React from "react";
-import styled from "styled-components";
 import Product from "./Product";
 
-const CatalogSection = styled.section`
-	padding: 3rem 8.5vw;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	gap: 0.5rem;
-	user-select: none;
-`;
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+
+const useStyles = makeStyles((theme) => ({
+	cardGrid: {
+		paddingTop: theme.spacing(8),
+		paddingBottom: theme.spacing(8)
+	}
+}));
 
 const Catalog = ({ catalog }) => {
+	const classes = useStyles();
+
 	return (
-		<CatalogSection>
-			{ catalog.map((product, index) => (
-				<Product key={ index } product={ product } />
-			)) }
-		</CatalogSection>
+		<Container className={ classes.cardGrid } maxWidth="md">
+			<Grid container spacing={ 4 }>
+				{ catalog.map((product) => (
+					<Product key={ product.id } product={ product } />
+				)) }
+			</Grid>
+		</Container>
 	);
 };
 
