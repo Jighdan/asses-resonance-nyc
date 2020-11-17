@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom"; 
 import { useAuth } from "../context/auth";
 import { getAirtableUserDataFromId } from "../plugins/airtableProvider";
@@ -24,7 +24,11 @@ const Panel = () => {
 	const { authToken, setAuthToken } = useAuth();
 	const classes = useStyles();
 
-	getAirtableUserDataFromId(authToken).then(response => setUserData(response));
+	useEffect(() => {
+		getAirtableUserDataFromId(authToken).then(response => {
+			setUserData(response);
+		})
+	}, [authToken]);
 
 	const logOut = () => {
 		setAuthToken("");

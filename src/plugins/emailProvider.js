@@ -10,7 +10,7 @@ const data = {
 
 init(data.userKey);
 
-export const productInformationRequest = (payload) => {
+const productInformationRequest = (payload) => {
 	emailjs.send(
 		data.serviceKey, 
 		data.templateProductKey, 
@@ -18,11 +18,16 @@ export const productInformationRequest = (payload) => {
 		data.userKey);
 };
 
-export const clientInformationRequest = (payload) => {
+const clientInformationRequest = (payload) => {
 	emailjs.send(
 		data.serviceKey,
 		data.templateClientKey,
 		constructClientRequest(payload),
 		data.userKey
 	);
+};
+
+export const emailProvider = (productRequestData, clientRequestData) => {
+	productInformationRequest(productRequestData);
+	clientInformationRequest(clientRequestData);
 };

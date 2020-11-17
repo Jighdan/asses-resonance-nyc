@@ -17,7 +17,7 @@ const Catalog = ({ catalog }) => {
 
 	return (
 		<Container className={ classes.cardGrid } maxWidth="md">
-			<Grid container spacing={ 4 }>
+			<Grid container spacing={ 6 }>
 				{ catalog.map((product) => (
 					<Product key={ product.id } product={ product } />
 				)) }

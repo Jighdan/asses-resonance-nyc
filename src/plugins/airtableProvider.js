@@ -38,8 +38,7 @@ export const getAirtableUserDataFromId = async (userId) => {
 export const airtableCatalog = async () => {
   const catalog = []
   await airtableBase("Furniture")
-    // Set maxRecords because couldn't find a way to dynamically get all products
-    .select({ view: "Main View", maxRecords: 100, fields: ["Name", "Picture", "In Stock", "Unit Cost", "Description", "Vendor", "Designer"] })
+    .select({ view: "Main View", fields: ["Name", "Picture", "In Stock", "Unit Cost", "Description", "Vendor", "Designer"] })
     .eachPage((records, fetchNextPage) => {
       catalog.push(...records);
       fetchNextPage();
