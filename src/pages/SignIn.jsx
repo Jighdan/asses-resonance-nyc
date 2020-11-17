@@ -74,13 +74,15 @@ const SignIn = () => {
 					/>
 
 					<Button
-						variant="container" type="submit" fullWidth
-						color="primary" className={ classes.submit }
+						variant="contained" type="submit" fullWidth
+						color="primary" className={ classes.submit}
 					>
-						Submit
+						Sign In
 					</Button>
 
-					<Link to="/sign-up">Not registered yet?</Link>
+					<Button component={ Link } to="/sign-up">
+						Not registered yet?
+					</Button>
 				</form>	
 			</section>
 		</Container>
