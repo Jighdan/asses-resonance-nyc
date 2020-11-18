@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import { AuthContext } from "./context/auth"
-import ProductsCatalog from "./pages/ProductsCatalog";
+import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
 function App() {
   const tokenKey = "resonance-auth-token";
-  const storedAuthToken = JSON.parse(localStorage.getItem(tokenKey));
+  const storedAuthToken = JSON.parse(sessionStorage.getItem(tokenKey));
   const [authToken, setAuthToken] = useState(storedAuthToken);
 
   const setToken = (payload) => {
@@ -20,7 +20,7 @@ function App() {
     <AuthContext.Provider value={ { authToken: authToken, setAuthToken: setToken } }>
       <BrowserRouter>
         <Switch>
-          <PrivateRoute path="/catalog" component={ ProductsCatalog } />
+          <PrivateRoute path="/dashboard" component={ Dashboard } />
           <Route path="/sign-up" component={ SignUp } />
           <Route path="/" exact component={ SignIn } />
         </Switch>

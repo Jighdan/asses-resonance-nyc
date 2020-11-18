@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonRequest from "./Product/ButtonRequest";
+import ButtonRequest from "./ButtonRequest";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";

@@ -1,5 +1,5 @@
 import React from "react";
-import Product from "./Product";
+import Product from "./Product/index";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";

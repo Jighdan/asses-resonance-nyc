@@ -37,8 +37,9 @@ export const getAirtableUserDataFromId = async (userId) => {
 
 export const airtableCatalog = async () => {
   const catalog = []
+  const lookupFields = ["Name", "Picture", "In Stock", "Unit Cost", "Description"]
   await airtableBase("Furniture")
-    .select({ view: "Main View", fields: ["Name", "Picture", "In Stock", "Unit Cost", "Description", "Vendor", "Designer"] })
+    .select({ view: "Main View", fields: lookupFields })
     .eachPage((records, fetchNextPage) => {
       catalog.push(...records);
       fetchNextPage();
@@ -47,14 +48,15 @@ export const airtableCatalog = async () => {
 };
 
 export const createAirtableUser = (userData) => {
-  const { username, firstName, lastName, email, password } = userData;
+  const { firstName, lastName, email, password } = userData;
   airtableBase("Users").create([{
     "fields": {
       "Password": password,
       "First Name": firstName,
       "Last Name": lastName,
       "email": email,
-      "username": username,
+      // Not using usernames in the application, so there's no need to register it.
+      "username": "",
     }
   }], (error) => {
     if (error) { console.error(error) };

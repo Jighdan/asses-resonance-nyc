@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../context/auth";
-import { getAirtableUserDataFromId } from "../plugins/airtableProvider";
-import { emailProvider } from "../plugins/emailProvider";
-import { currentDate } from "../plugins/dateProvider";
+import { useAuth } from "../../context/auth";
+import { getAirtableUserDataFromId } from "../../plugins/airtableProvider";
+import { emailProvider } from "../../plugins/emailProvider";
+import { currentDate } from "../../plugins/dateProvider";
 
 import Button from "@material-ui/core/Button";
 
 const ButtonRequest =({ product }) => {
 	const [userData, setUserData] = useState({});
+	const [emailSent, setEmailSent] = useState(false);
 	const { authToken } = useAuth();
 
 	useEffect(() => {
@@ -31,17 +32,19 @@ const ButtonRequest =({ product }) => {
 	};
 
 	const handleClick = () => {
-		emailProvider(productData, clientData);
+		// emailProvider(productData, clientData);
 		window.alert("Email sent");
 	};
 
 	return (
-		<Button
-			variant="outlined" size="small" color="primary"
-			onClick={ handleClick }
-		>
-			Request Information
-		</Button>
+		<>
+			<Button
+				variant="outlined" size="small" color="primary"
+				onClick={ handleClick }
+			>
+				Request Information
+			</Button>
+		</>
 	)
 };
 

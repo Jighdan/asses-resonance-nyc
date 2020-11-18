@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -48,14 +49,15 @@ const SignIn = () => {
 		})
 	};
 
-	if (isLoggedIn) { return <Redirect to="/catalog" /> };
+	if (isLoggedIn) { return <Redirect to="/dashboard" /> };
 
 	return (
 		<Container component="main" maxWidth="xs">
 			<section className={ classes.paper }>
-				{ isError && <h3>The username or password provided were invalid!</h3> }
-
 				<Typography component="h1" variant="h5">Sign In</Typography>
+				{ isError && (
+					<Alert severity="error">The username or password provided were invalid!</Alert>
+				) }
 				<form className={ classes.form } onSubmit={ handleSubmit } noValidate>
 					<TextField
 						type="email" variant="outlined"

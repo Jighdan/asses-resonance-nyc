@@ -3,7 +3,7 @@ import { airtableCatalog } from "../plugins/airtableProvider";
 import Panel from "../components/Panel";
 import Catalog from "../components/Catalog";
 
-const ProductsCatalog = () => {
+const Dashboard = () => {
 	const [productsCatalog, setProductsCatalog] = useState([]);
 
 	useEffect(() => {
@@ -14,10 +14,10 @@ const ProductsCatalog = () => {
 
 	return (
 		<section>
-			<Panel user={ "Jaime" } />
+			<Panel />
 			<Catalog catalog={ productsCatalog } />
 		</section>
 	);
 };
 
-export default ProductsCatalog;
+export default Dashboard;

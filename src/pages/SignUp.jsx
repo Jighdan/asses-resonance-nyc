@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = () => {
-	const [username, setUsername] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -36,7 +35,7 @@ const SignUp = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const userData = { username, firstName, lastName, email, password };
+		const userData = { firstName, lastName, email, password };
 		createAirtableUser(userData);
 		setRegistered(true);
 	};
@@ -75,15 +74,6 @@ const SignUp = () => {
 								onChange={ event => setLastName(event.target.value) }
 								required fullWidth
 								label="Last Name"
-							/>
-						</Grid>
-
-						<Grid item xs={ 12 }>
-							<TextField
-								variant="outlined" value={ username }
-								onChange={ event => setUsername(event.target.value) }
-								required fullWidth
-								label="Username"
 							/>
 						</Grid>
 
