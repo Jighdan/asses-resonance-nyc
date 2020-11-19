@@ -26,6 +26,7 @@ function App() {
           <Switch>
             <PrivateRoute path="/dashboard" component={ Dashboard } />
             <Route path="/sign-up" component={ SignUp } />
+            { console.log(process.env.REACT_APP_TEST_TEST)}
             <Route path="/" exact component={ SignIn } />
           </Switch>
         </BrowserRouter>

@@ -1,10 +1,20 @@
-# Resonance Interview: Private Resonance E-Commerce Site
+# Private E-Commerce Site
+
+In order to run you will need a `.env` file with these variables:
+```txt
+REACT_APP_AIRTABLE_API_KEY
+REACT_APP_AIRTABLE_BASE_KEY
+REACT_APP_EMAIL_USER_KEY
+REACT_APP_EMAIL_SERVICE_KEY
+REACT_APP_EMAIL_TEMPLATE_PRODUCT_KEY
+REACT_APP_EMAIL_TEMPLATE_CLIENT_KEY
+```
 
 ## Requirements
 - Simple User Sign In and Sign Up Page (Credential Stored in the Base) using Encryption
 - Render entire Resonance Catalog.
-- Request more information on specific product; send the information about the selected product to the user and to `techpirates@resonance.nyc`;
-- For test purposes please do not send the emails to the `techpirates`.
+- Request more information on specific product; send the information about the selected product to the user and to the provided Email;
+- For test purposes please do not send the emails to the provided email.
 
 ## To-do
 - [x] When registering a new user, disallow if an user with the registered email exists.

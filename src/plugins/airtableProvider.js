@@ -5,12 +5,9 @@ import {
   constructCatalogProductRecord
 } from "./airtableRecordConstructor";
 
-const data = {
-  apiKey: "keyyj61FnLZAvaS7X",
-  base: "appzeUDpZOqRjLPaJ",
-};
-
-const airtableBase = new Airtable({ apiKey: data.apiKey }).base(data.base);
+const airtableBase = new Airtable({
+  apiKey: process.env.REACT_APP_AIRTABLE_API_KEY
+}).base(process.env.REACT_APP_AIRTABLE_BASE_KEY);
 
 // Catalog
 export const getAirtableCatalog = async () => {

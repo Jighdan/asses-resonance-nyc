@@ -1,29 +1,22 @@
 import emailjs, { init } from "emailjs-com";
 import { constructProductRequest, constructClientRequest } from "./emailRecordConstructor";
 
-const data = {
-	userKey: "user_BjAsDS1hlUGM7EoLCmoW3",
-	serviceKey: "service_c8m2kq9",
-	templateProductKey: "template_fzprz1z",
-	templateClientKey: "template_cod224j",
-};
-
-init(data.userKey);
+init(process.env.REACT_APP_EMAIL_USER_KEY);
 
 const productInformationRequest = (payload) => {
 	emailjs.send(
-		data.serviceKey, 
-		data.templateProductKey, 
+		process.env.REACT_APP_EMAIL_SERVICE_KEY, 
+		process.env.REACT_APP_EMAIL_TEMPLATE_PRODUCT_KEY, 
 		constructProductRequest(payload), 
-		data.userKey);
+		process.env.REACT_APP_EMAIL_USER_KEY);
 };
 
 const clientInformationRequest = (payload) => {
 	emailjs.send(
-		data.serviceKey,
-		data.templateClientKey,
+		process.env.REACT_APP_EMAIL_SERVICE_KEY,
+		process.env.REACT_APP_EMAIL_TEMPLATE_CLIENT_KEY,
 		constructClientRequest(payload),
-		data.userKey
+		process.env.REACT_APP_EMAIL_USER_KEY
 	);
 };
 
