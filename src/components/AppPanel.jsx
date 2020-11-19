@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
 	}
 }));
 
-const Panel = () => {
+const AppPanel = () => {
 	const [isLoggedOut, setLoggedOut] = useState(false);
 	const [userData, setUserData] = useState({});
 	const { authToken, setAuthToken } = useAuth();
@@ -27,12 +27,12 @@ const Panel = () => {
 	useEffect(() => {
 		getAirtableUserDataFromId(authToken).then(response => {
 			setUserData(response);
-		})
+		});
 	}, [authToken]);
 
 	const logOut = () => {
-		setAuthToken("");
 		setLoggedOut(true);
+		setAuthToken("");
 	};
 
 	if (isLoggedOut) { return <Redirect to="/" /> };
@@ -51,4 +51,4 @@ const Panel = () => {
 	);
 };
 
-export default Panel;
+export default AppPanel;

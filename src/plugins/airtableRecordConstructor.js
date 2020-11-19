@@ -19,7 +19,7 @@ export const constructCatalogProductRecord = (record) => {
 		name: record.get("Name"),
 		picture: record.get("Picture"),
 		description: record.get("Description"),
-		vendor: record.get("vendor"),
+		vendor: record.get("Vendor"),
 		unitCost: record.get("Unit Cost"),
 		inStock: record.get("In Stock"),
 		size: record.get("Size (WxLxH)"),

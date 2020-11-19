@@ -4,6 +4,7 @@ import { useAuth } from "../context/auth";
 import { getAirtableUserAuth } from "../plugins/airtableProvider";
 
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -58,7 +59,7 @@ const SignIn = () => {
 				{ isError && (
 					<Alert severity="error">The username or password provided were invalid!</Alert>
 				) }
-				<form className={ classes.form } onSubmit={ handleSubmit } noValidate>
+				<form className={ classes.form } onSubmit={ handleSubmit }>
 					<TextField
 						type="email" variant="outlined"
 						required fullWidth label="E-Mail"
@@ -82,9 +83,19 @@ const SignIn = () => {
 						Sign In
 					</Button>
 
-					<Button component={ Link } to="/sign-up">
-						Not registered yet?
-					</Button>
+					<Grid container justify="flex-end">
+						{/* <Grid item>
+							<Button variant="text">
+								Forgot Password?
+							</Button>
+						</Grid> */}
+
+						<Grid item>
+							<Button component={ Link } to="/sign-up" variant="text">
+								Not registered yet?
+							</Button>
+						</Grid>
+					</Grid>					
 				</form>	
 			</section>
 		</Container>

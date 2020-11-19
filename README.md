@@ -7,10 +7,10 @@
 - For test purposes please do not send the emails to the `techpirates`.
 
 ## To-do
-- When registering a new user, disallow if an user with the registered email exists.
-- In the `Sign In` page, a `Forgot Password?` button that sends the user password to the user registered email.
-- When user clicks on `Request Product Information` button, show a notification if email was sent.
-- Improve email template using `HTML`.
+- [x] When registering a new user, disallow if an user with the registered email exists.
+- [x] Improve email template using `HTML`. `EmailJs` doesn't support proper `HTML` templates.
+- [o] In the `Sign In` page, a `Forgot Password?` button that sends the user password to the user registered email.
+- [x] When user clicks on `Request Product Information` button, show a notification if email was sent.
 
 ### Concerns
 - How will we show each product in the catalog?

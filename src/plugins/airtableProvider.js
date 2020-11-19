@@ -12,6 +12,19 @@ const data = {
 
 const airtableBase = new Airtable({ apiKey: data.apiKey }).base(data.base);
 
+// Catalog
+export const getAirtableCatalog = async () => {
+  const catalog = []
+  await airtableBase("Furniture")
+    .select({ view: "Main View" })
+    .eachPage((records, fetchNextPage) => {
+      catalog.push(...records);
+      fetchNextPage();
+    });
+  return catalog.map(record => constructCatalogProductRecord(record));
+};
+
+// Users
 export const getAirtableUserAuth = async (email, password) => {
   let userAuth;
   await airtableBase("Users")
@@ -24,6 +37,17 @@ export const getAirtableUserAuth = async (email, password) => {
   return userAuth.id;
 };
 
+export const checkUserExistence = async (userEmail) => {
+  let userExistence;
+  await airtableBase("Users")
+    .select({ view: "Grid view" })
+    .eachPage((records, fetchNextPage) => {
+      userExistence = records.find(record => record.get("email") === userEmail);
+      fetchNextPage();
+    });
+  return userExistence ? true : false;
+};
+
 export const getAirtableUserDataFromId = async (userId) => {
   let userRecord;
   await airtableBase("Users")
@@ -33,18 +57,6 @@ export const getAirtableUserDataFromId = async (userId) => {
       fetchNextPage();
     });
     return userRecord ? constructUserRecord(userRecord) : userRecord;
-};
-
-export const airtableCatalog = async () => {
-  const catalog = []
-  const lookupFields = ["Name", "Picture", "In Stock", "Unit Cost", "Description"]
-  await airtableBase("Furniture")
-    .select({ view: "Main View", fields: lookupFields })
-    .eachPage((records, fetchNextPage) => {
-      catalog.push(...records);
-      fetchNextPage();
-    });
-  return catalog.map(record => constructCatalogProductRecord(record));
 };
 
 export const createAirtableUser = (userData) => {
