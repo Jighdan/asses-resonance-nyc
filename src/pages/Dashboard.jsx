@@ -35,7 +35,7 @@ const Dashboard = () => {
 							component="h1" variant="h2"
 							align="center" color="textPrimary"
 						>
-							Resonance
+							Resonance Products
 						</Typography>
 					</Container>
 				</section>

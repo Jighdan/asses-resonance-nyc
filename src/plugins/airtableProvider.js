@@ -14,7 +14,7 @@ const airtableBase = new Airtable({ apiKey: data.apiKey }).base(data.base);
 
 // Catalog
 export const getAirtableCatalog = async () => {
-  const catalog = []
+  const catalog = [];
   await airtableBase("Furniture")
     .select({ view: "Main View" })
     .eachPage((records, fetchNextPage) => {

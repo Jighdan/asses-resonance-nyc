@@ -84,12 +84,6 @@ const SignIn = () => {
 					</Button>
 
 					<Grid container justify="flex-end">
-						{/* <Grid item>
-							<Button variant="text">
-								Forgot Password?
-							</Button>
-						</Grid> */}
-
 						<Grid item>
 							<Button component={ Link } to="/sign-up" variant="text">
 								Not registered yet?
